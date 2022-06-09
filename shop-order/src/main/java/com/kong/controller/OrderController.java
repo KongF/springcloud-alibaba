@@ -28,14 +28,16 @@ public class OrderController {
     @GetMapping("/order/prod/{pid}")
     public Order order(@PathVariable("pid")Integer pid){
         log.info(">>客户下单，调用商品微服务查询商品信息");
-        //nacos 中获取服务地址
-        List<ServiceInstance> instances = discoveryClient.getInstances("service-product");
-//        ServiceInstance serviceInstance = discoveryClient.getInstances("service-product").get(0);
-        int index = new Random().nextInt(instances.size());
-        ServiceInstance serviceInstance = instances.get(index);
-        String url = serviceInstance.getHost()+":"+serviceInstance.getPort();
-        log.info("nacos中获取的url:"+url);
+//        //nacos 中获取服务地址
+//        List<ServiceInstance> instances = discoveryClient.getInstances("service-product");
+////        ServiceInstance serviceInstance = discoveryClient.getInstances("service-product").get(0);
+//        int index = new Random().nextInt(instances.size());
+//        ServiceInstance serviceInstance = instances.get(index);
+//        String url = serviceInstance.getHost()+":"+serviceInstance.getPort();
+//        log.info("nacos中获取的url:"+url);
+        String url = "service-product";
         Product product = restTemplate.getForObject("http://"+url+"/product/"+pid,Product.class);
+
         Order order = new Order();
         order.setUid(1);
         order.setUsername(product.getPname());
