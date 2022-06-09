@@ -3,6 +3,7 @@ package com.kong.controller;
 import com.kong.enity.Order;
 import com.kong.enity.Product;
 import com.kong.service.OrderService;
+import com.kong.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -23,6 +24,8 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
     @Autowired
+    private ProductService productService;
+    @Autowired
     private DiscoveryClient discoveryClient;
 
     @GetMapping("/order/prod/{pid}")
@@ -36,8 +39,8 @@ public class OrderController {
 //        String url = serviceInstance.getHost()+":"+serviceInstance.getPort();
 //        log.info("nacos中获取的url:"+url);
         String url = "service-product";
-        Product product = restTemplate.getForObject("http://"+url+"/product/"+pid,Product.class);
-
+//        Product product = restTemplate.getForObject("http://"+url+"/product/"+pid,Product.class);
+        Product product = productService.findByPid(pid);
         Order order = new Order();
         order.setUid(1);
         order.setUsername(product.getPname());
