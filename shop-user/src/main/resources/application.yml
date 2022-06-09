@@ -2,15 +2,15 @@ server:
   port: 8071
 spring:
   application:
-    name: service-product
-    datasourcce:
-      driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql:///shop?
-      username: root
-      password: root
-      jpa:
-        properties:
-          hibernate:
-            hbm2ddl:
-              auto: update
-              dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    name: service-user
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://sh-cynosdbmysql-grp-r8gneeuy.sql.tencentcdb.com:27290/tyshowdoc?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false
+    username: root
+    password: czs7xtu4123-
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect

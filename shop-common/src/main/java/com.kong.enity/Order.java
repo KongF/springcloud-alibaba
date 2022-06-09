@@ -17,4 +17,12 @@ public class Order {
     private Integer uid;
     //用户名
     private String username;
+
+    private Integer pid;
+
+    private String pname;
+
+    private Double pprice;
+
+    private Integer number;
 }
