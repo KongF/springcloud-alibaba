@@ -9,6 +9,12 @@ spring:
     url: jdbc:mysql://sh-cynosdbmysql-grp-r8gneeuy.sql.tencentcdb.com:27290/mall_tiny?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false
     username: root
     password: czs7xtu4123-
+  zipkin:
+    base-url: http://127.0.0.1:9411/
+    discovery-client-enabled: false #让nacos把它当成一个URL，而不是当作服务名
+  sleuth:
+    sampler:
+      probability: 1.0
   cloud:
     nacos:
       discovery:

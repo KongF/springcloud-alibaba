@@ -1,0 +1,34 @@
+server:
+  port: 7000
+spring:
+  application:
+    name: api-gateway
+  zipkin:
+    base-url: http://127.0.0.1:9411/
+    discovery-client-enabled: false #让nacos把它当成一个URL，而不是当作服务名
+  sleuth:
+    sampler:
+      probability: 1.0
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true # 让gateway可以发现nacos的微服务
+      routes: # 路由数组【路由：就是指定当请求满足什么条件的时候转到哪个服务】
+        - id: producct_route # 当前路由的标识，要去唯一
+          uri: lb://service-product # 请求要转发到的地址
+          #order: 1 # 路由的优先级，数字越小级别越高
+          predicates: #断言
+          - Path=/product-serv/** # 当请 求路径满足Path指定的规则时，才进行路由转发
+#          - Age=18,60 #自定义断言器
+          filters: # 过滤器，请求在传递过程中可以通过过滤器对其进行一定的修改
+          - StripPrefix=1 # 转发之前去掉1层路径
+        - id: order_route
+          uri: lb://service-order
+          predicates:
+            - Path=/order-serv/**
+          filters:
+          - StripPrefix=1

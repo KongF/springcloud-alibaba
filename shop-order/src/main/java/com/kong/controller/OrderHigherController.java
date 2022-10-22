@@ -43,4 +43,12 @@ public class OrderHigherController {
     public String message(){
         return "高并发测试";
     }
+    @RequestMapping("/order/message1")
+    public String message1(){
+        return "高并发测试1";
+    }
+    @RequestMapping("/order/message2")
+    public String message2(){
+        return "高并发测试2";
+    }
 }
